@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="EQf-MU-4j3">
+            <objects>
+                <viewController storyboardIdentifier="PVLoginViewController" id="A7Z-zu-jVM" customClass="PVLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wmb-ZR-dhw"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rhx-35-bj1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JCK-Ct-Ne2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDw-g4-cSY">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="gMg-I6-vBU"/>
+                                </constraints>
+                                <state key="normal" title="Login to VK"/>
+                                <connections>
+                                    <action selector="onButtonClickLogin:" destination="A7Z-zu-jVM" eventType="touchUpInside" id="s8r-pl-BKR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vDw-g4-cSY" secondAttribute="trailing" constant="20" id="Sor-aL-Lb9"/>
+                            <constraint firstItem="vDw-g4-cSY" firstAttribute="leading" secondItem="JCK-Ct-Ne2" secondAttribute="leading" constant="20" id="WFA-KB-MnK"/>
+                            <constraint firstItem="vDw-g4-cSY" firstAttribute="centerY" secondItem="JCK-Ct-Ne2" secondAttribute="centerY" id="gFG-Hz-MWn"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="480"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xQZ-RB-9aE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-187" y="-90"/>
+        </scene>
+    </scenes>
+</document>

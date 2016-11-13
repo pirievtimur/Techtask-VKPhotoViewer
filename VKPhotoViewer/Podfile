@@ -3,6 +3,8 @@ inhibit_all_warnings!
 use_frameworks!
 
 target :VKPhotoViewer do
+    pod 'VK-ios-sdk'
     pod 'SDWebImage', '~>3.8'
-    pod "VK-ios-sdk"
+    pod 'Mantle'
+    pod 'MWPhotoBrowser', '~> 2.1.2'
 end
