@@ -152,8 +152,8 @@
 		716CC1141DD5EA8300F5E329 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				716CC1161DD5EB6200F5E329 /* UIViewController+Additions.h */,
 				716CC1171DD5EB6200F5E329 /* UIViewController+Additions.m */,
+				716CC1161DD5EB6200F5E329 /* UIViewController+Additions.h */,
 				716702B21DDA057F0001AE39 /* UIAlertController+Additions.h */,
 				716702B31DDA057F0001AE39 /* UIAlertController+Additions.m */,
 			);

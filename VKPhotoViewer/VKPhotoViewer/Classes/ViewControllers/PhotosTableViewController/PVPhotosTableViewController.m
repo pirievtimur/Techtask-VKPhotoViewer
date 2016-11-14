@@ -23,7 +23,7 @@ static const CGFloat CELL_HEIGHT = 250;
 
 @property (nonatomic, strong) NSString *albumIdParameter;
 @property (nonatomic, strong) NSMutableArray *photosData;
-@property (nonatomic, strong) NSMutableArray *photosArray;
+@property (nonatomic, strong) NSMutableArray *fullscreenPhotos;
 
 @end
 
@@ -53,6 +53,7 @@ static const CGFloat CELL_HEIGHT = 250;
     VKRequest *photosRequest = [VKRequest requestWithMethod:getAlbumsMethod parameters:@{VK_API_USER_ID:self.user.id, VK_API_ALBUM_ID: self.albumIdParameter}];
     [photosRequest executeWithResultBlock:^(VKResponse *response) {
         self.photosData = [self parseResponse:response.json];
+        self.fullscreenPhotos = [self userFullscreenPhotos:self.photosData];
         [self.tableView reloadData];
         [activityView hide:YES];
     } errorBlock:^(NSError *error) {
@@ -67,6 +68,7 @@ static const CGFloat CELL_HEIGHT = 250;
     VKRequest *photosRequest = [VKRequest requestWithMethod:getAlbumsMethod parameters:@{VK_API_USER_ID:self.user.id, VK_API_ALBUM_ID: self.albumIdParameter}];
     [photosRequest executeWithResultBlock:^(VKResponse *response) {
         self.photosData = [self parseResponse:response.json];
+        self.fullscreenPhotos = [self userFullscreenPhotos:self.photosData];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     } errorBlock:^(NSError *error) {
@@ -95,7 +97,6 @@ static const CGFloat CELL_HEIGHT = 250;
     return array;
 }
 
-
 // MARK: - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -116,13 +117,9 @@ static const CGFloat CELL_HEIGHT = 250;
     
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MWPhotoBrowser *photoBrowser = [self photoBrowser];
-    PVPhotoModel *dataForCell = [self.photosData objectAtIndex:indexPath.row];
-    MWPhoto *photo = [[MWPhoto alloc] initWithURL:[dataForCell getFullscreenImageURL]];
-    self.photosArray = [@[photo] mutableCopy];
+    [photoBrowser setCurrentPhotoIndex:indexPath.row];
     [self.navigationController pushViewController:photoBrowser animated:true];
 }
-
-
 
 // MARK: - Table view delegate
 
@@ -136,12 +133,21 @@ static const CGFloat CELL_HEIGHT = 250;
 
 // MARK: - MWPhotoBrowserDelegate
 
+- (NSMutableArray *)userFullscreenPhotos:(NSMutableArray *)photos {
+    NSMutableArray *fullscreenPhotos = [NSMutableArray new];
+    for (id item in photos) {
+        MWPhoto *photo = [[MWPhoto alloc] initWithURL:[item getFullscreenImageURL]];
+        [fullscreenPhotos addObject:photo];
+    }
+    return fullscreenPhotos;
+}
+
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return 1;
+    return [self.fullscreenPhotos count];
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    return [self.photosArray objectAtIndex:index];
+    return [self.fullscreenPhotos objectAtIndex:index];
 }
 
 - (MWPhotoBrowser*)photoBrowser {
