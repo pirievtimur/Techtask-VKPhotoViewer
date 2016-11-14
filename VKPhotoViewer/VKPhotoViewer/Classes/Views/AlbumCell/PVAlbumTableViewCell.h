@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PVAlbumModel.h"
+#import "DACircularProgressView.h"
 
 @interface PVAlbumTableViewCell : UITableViewCell
-    
-@property (weak, nonatomic) IBOutlet UIImageView *albumImage;
-@property (weak, nonatomic) IBOutlet UILabel *albumTitle;
+
+- (void)updateWithModel:(PVAlbumModel *)model;
 
 @end

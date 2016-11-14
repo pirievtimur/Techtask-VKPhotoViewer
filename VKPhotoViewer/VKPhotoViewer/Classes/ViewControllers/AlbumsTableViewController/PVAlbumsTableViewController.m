@@ -10,14 +10,16 @@
 #import "PVPhotosTableViewController.h"
 #import "PVAlbumTableViewCell.h"
 #import "PVAlbumModel.h"
+#import "UIAlertController+Additions.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "MBProgressHUD.h"
 
 // vk api methods, parameters
 static NSString *getAlbumsMethod = @"photos.getAlbums";
 static NSString *VK_API_NEED_SYSTEM = @"need_system";
 static NSString *VK_API_NEED_THUMBS = @"need_covers";
 
-static const CGFloat CELL_HEIGHT = 100.f;
+static const CGFloat CELL_HEIGHT = 150;
 
 @interface PVAlbumsTableViewController ()
 
@@ -30,20 +32,24 @@ static const CGFloat CELL_HEIGHT = 100.f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:false];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleDone target:self action:@selector(logout)];
+    
     //register nib
     NSString *identifier = NSStringFromClass([PVAlbumTableViewCell class]);
     UINib *cellNib = [UINib nibWithNibName:identifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:identifier];
     
+    //set refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshUserAlbumsData) forControlEvents:UIControlEventValueChanged];
+
     //load data for table
     [self getUserAlbums];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:true];
-    
+    [self.navigationController setNavigationBarHidden:false];
 }
 
 // MARK: - User's albums data
@@ -51,18 +57,54 @@ static const CGFloat CELL_HEIGHT = 100.f;
 - (void)getUserAlbums {
     VKRequest *userRequest = [[VKApiUsers new] get];
     [userRequest executeWithResultBlock:^(VKResponse *response) {
+        
+        MBProgressHUD *activityView = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        activityView.mode = MBProgressHUDModeIndeterminate;
+        
         self.currentUser = [response.parsedModel firstObject];
         NSDictionary *albumsRequestParameters = @{VK_API_OWNER_ID : self.currentUser.id,  VK_API_NEED_SYSTEM: @"1",  VK_API_NEED_THUMBS: @"1"};
+        
+        VKRequest *albumsRequest = [VKRequest requestWithMethod:getAlbumsMethod parameters:albumsRequestParameters];
+        [albumsRequest executeWithResultBlock:^(VKResponse *response) {
+            
+            self.albumsData = [self parseResponse:response.json];
+            [activityView hide:YES];
+            
+            [self.tableView reloadData];
+        } errorBlock:^(NSError *error) {
+            [activityView hide:YES];
+            NSString *errorString = [NSString stringWithFormat:@"%@", error.localizedDescription];
+            [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:errorString] animated:true completion:nil];
+        }];
+    } errorBlock:^(NSError *error) {
+        NSString *errorString = [NSString stringWithFormat:@"%@", error.localizedDescription];
+        [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:errorString] animated:true completion:nil];
+    }];
+}
+
+- (void)refreshUserAlbumsData {
+    //additional method to avoid activity view during spinner
+    VKRequest *userRequest = [[VKApiUsers new] get];
+    [userRequest executeWithResultBlock:^(VKResponse *response) {
+        self.currentUser = [response.parsedModel firstObject];
+        NSDictionary *albumsRequestParameters = @{VK_API_OWNER_ID : self.currentUser.id,  VK_API_NEED_SYSTEM: @"1",  VK_API_NEED_THUMBS: @"1"};
+        
         VKRequest *albumsRequest = [VKRequest requestWithMethod:getAlbumsMethod parameters:albumsRequestParameters];
         [albumsRequest executeWithResultBlock:^(VKResponse *response) {
             self.albumsData = [self parseResponse:response.json];
             [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
         } errorBlock:^(NSError *error) {
-            NSLog(@"Misha vse huina %@", error.localizedDescription);
+            [self.refreshControl endRefreshing];
+            NSString *errorString = [NSString stringWithFormat:@"%@", error.localizedDescription];
+            [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:errorString] animated:true completion:nil];
         }];
     } errorBlock:^(NSError *error) {
-        NSLog(@"Error %@", error.localizedDescription);
+        [self.refreshControl endRefreshing];
+        NSString *errorString = [NSString stringWithFormat:@"%@", error.localizedDescription];
+        [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:errorString] animated:true completion:nil];
     }];
+
 }
 
 - (NSMutableArray*)parseResponse:(NSDictionary*)responseObject {
@@ -92,22 +134,6 @@ static const CGFloat CELL_HEIGHT = 100.f;
     [self.navigationController popViewControllerAnimated:true];
 }
 
-// MARK: - Image downloader
-
-- (void)downloadImageWithURL:(NSURL*)imageURL toimageView:(UIImageView*)imageView {
-    SDWebImageDownloader *downloader = [SDWebImageDownloader sharedDownloader];
-    [downloader downloadImageWithURL:imageURL
-                             options:0
-                            progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                // progression tracking code
-                            }
-                           completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                               if (image && finished) {
-                                   imageView.image = [UIImage imageWithData:data];
-                               }
-                           }];
-}
-
 // MARK: - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -122,8 +148,7 @@ static const CGFloat CELL_HEIGHT = 100.f;
     NSString *identifier = NSStringFromClass([PVAlbumTableViewCell class]);
     PVAlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     PVAlbumModel *dataForCell = [self.albumsData objectAtIndex:indexPath.row];
-    [self downloadImageWithURL:[dataForCell getThumb] toimageView:cell.imageView];
-    cell.albumTitle.text = dataForCell.title;
+    [cell updateWithModel:dataForCell];
     
     return cell;
 }

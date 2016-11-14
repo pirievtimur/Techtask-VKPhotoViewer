@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		716702AF1DD9F1BC0001AE39 /* PVActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 716702AE1DD9F1BC0001AE39 /* PVActivityIndicatorView.m */; };
+		716702B11DD9F1D10001AE39 /* PVActivityIndicatorVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 716702B01DD9F1D10001AE39 /* PVActivityIndicatorVIew.xib */; };
+		716702B41DDA057F0001AE39 /* UIAlertController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 716702B31DDA057F0001AE39 /* UIAlertController+Additions.m */; };
 		716CC0FE1DD5E94200F5E329 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 716CC0FD1DD5E94200F5E329 /* main.m */; };
 		716CC1011DD5E94200F5E329 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 716CC1001DD5E94200F5E329 /* AppDelegate.m */; };
 		716CC1091DD5E94200F5E329 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 716CC1081DD5E94200F5E329 /* Assets.xcassets */; };
@@ -29,6 +32,11 @@
 /* Begin PBXFileReference section */
 		21919503198C6D2E40CD86F1 /* Pods-VKPhotoViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKPhotoViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKPhotoViewer/Pods-VKPhotoViewer.debug.xcconfig"; sourceTree = "<group>"; };
 		4D158FDA82A95076BFA5D392 /* Pods-VKPhotoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKPhotoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-VKPhotoViewer/Pods-VKPhotoViewer.release.xcconfig"; sourceTree = "<group>"; };
+		716702AD1DD9F1BC0001AE39 /* PVActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVActivityIndicatorView.h; sourceTree = "<group>"; };
+		716702AE1DD9F1BC0001AE39 /* PVActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVActivityIndicatorView.m; sourceTree = "<group>"; };
+		716702B01DD9F1D10001AE39 /* PVActivityIndicatorVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVActivityIndicatorVIew.xib; sourceTree = "<group>"; };
+		716702B21DDA057F0001AE39 /* UIAlertController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
+		716702B31DDA057F0001AE39 /* UIAlertController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Additions.m"; sourceTree = "<group>"; };
 		716CC0F91DD5E94200F5E329 /* VKPhotoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhotoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		716CC0FD1DD5E94200F5E329 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		716CC0FF1DD5E94200F5E329 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,6 +86,16 @@
 				D367BBFDEEC8A3622B5E2BE7 /* Pods_VKPhotoViewer.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		716702AC1DD9F1970001AE39 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				716702AD1DD9F1BC0001AE39 /* PVActivityIndicatorView.h */,
+				716702AE1DD9F1BC0001AE39 /* PVActivityIndicatorView.m */,
+				716702B01DD9F1D10001AE39 /* PVActivityIndicatorVIew.xib */,
+			);
+			path = ActivityIndicator;
 			sourceTree = "<group>";
 		};
 		716CC0F01DD5E94200F5E329 = {
@@ -136,6 +154,8 @@
 			children = (
 				716CC1161DD5EB6200F5E329 /* UIViewController+Additions.h */,
 				716CC1171DD5EB6200F5E329 /* UIViewController+Additions.m */,
+				716702B21DDA057F0001AE39 /* UIAlertController+Additions.h */,
+				716702B31DDA057F0001AE39 /* UIAlertController+Additions.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -145,17 +165,9 @@
 			children = (
 				716CC11A1DD5EE6B00F5E329 /* LoginViewController */,
 				71FAA04D1DD61FB00003999F /* AlbumsTableViewController */,
-				716CC1191DD5EE6B00F5E329 /* FullscreenPhotoViewController */,
 				716CC11B1DD5EE6B00F5E329 /* PhotosTableViewController */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		716CC1191DD5EE6B00F5E329 /* FullscreenPhotoViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FullscreenPhotoViewController;
 			sourceTree = "<group>";
 		};
 		716CC11A1DD5EE6B00F5E329 /* LoginViewController */ = {
@@ -181,6 +193,7 @@
 		71870FDE1DD8CB43002F2796 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				716702AC1DD9F1970001AE39 /* ActivityIndicator */,
 				71870FDF1DD8CB43002F2796 /* AlbumCell */,
 				71870FE01DD8CB43002F2796 /* PhotoCell */,
 			);
@@ -308,6 +321,7 @@
 				716CC1251DD5EEF700F5E329 /* PVLoginViewController.storyboard in Resources */,
 				71FAA0541DD623D30003999F /* PVAlbumsTableViewController.storyboard in Resources */,
 				71870FEF1DD8D39B002F2796 /* PVPhotosTableViewController.storyboard in Resources */,
+				716702B11DD9F1D10001AE39 /* PVActivityIndicatorVIew.xib in Resources */,
 				716CC1091DD5E94200F5E329 /* Assets.xcassets in Resources */,
 				71870FE51DD8CB78002F2796 /* PVAlbumTableViewCell.xib in Resources */,
 			);
@@ -377,6 +391,8 @@
 				71870FF21DD8D84D002F2796 /* PVPhotoModel.m in Sources */,
 				71CC3D721DD6740B0055AFBB /* PVAlbumModel.m in Sources */,
 				716CC1011DD5E94200F5E329 /* AppDelegate.m in Sources */,
+				716702B41DDA057F0001AE39 /* UIAlertController+Additions.m in Sources */,
+				716702AF1DD9F1BC0001AE39 /* PVActivityIndicatorView.m in Sources */,
 				716CC0FE1DD5E94200F5E329 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,7 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -465,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -481,8 +497,9 @@
 				DEVELOPMENT_TEAM = C22TD2AZTE;
 				INFOPLIST_FILE = VKPhotoViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ptb.vkphotoviewer.VKPhotoViewer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ptb.vkphotoviewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -495,8 +512,9 @@
 				DEVELOPMENT_TEAM = C22TD2AZTE;
 				INFOPLIST_FILE = VKPhotoViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ptb.vkphotoviewer.VKPhotoViewer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ptb.vkphotoviewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

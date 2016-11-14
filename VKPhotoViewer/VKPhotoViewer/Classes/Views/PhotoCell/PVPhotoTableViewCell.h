@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DACircularProgressView.h"
+#import "PVPhotoModel.h"
 
 @interface PVPhotoTableViewCell : UITableViewCell
     
-@property (weak, nonatomic) IBOutlet UIImageView *photo;
-@property (weak, nonatomic) IBOutlet UILabel *photoTitle;
+
+
+- (void)updateWithModel:(PVPhotoModel *) model;
 
 @end

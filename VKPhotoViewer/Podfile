@@ -4,6 +4,7 @@ use_frameworks!
 
 target :VKPhotoViewer do
     pod 'VK-ios-sdk'
+    pod 'Masonry', '~> 1.0.2'
     pod 'SDWebImage', '~>3.8'
     pod 'Mantle'
     pod 'MWPhotoBrowser', '~> 2.1.2'

@@ -18,21 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDw-g4-cSY">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jom-aq-HYe">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vk_button" translatesAutoresizingMaskIntoConstraints="NO" id="Ikj-ix-Bf4">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="155" id="SyO-al-0J1"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDw-g4-cSY">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="2hx-w7-6NH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <state key="normal" title="Sign in"/>
+                                        <connections>
+                                            <action selector="onButtonClickLogin:" destination="A7Z-zu-jVM" eventType="touchUpInside" id="s8r-pl-BKR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="gMg-I6-vBU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ikj-ix-Bf4" secondAttribute="trailing" id="5A0-h2-eYR"/>
+                                    <constraint firstAttribute="bottom" secondItem="vDw-g4-cSY" secondAttribute="bottom" id="7Z0-JG-xdx"/>
+                                    <constraint firstAttribute="trailing" secondItem="vDw-g4-cSY" secondAttribute="trailing" id="ESK-tu-rzg"/>
+                                    <constraint firstAttribute="width" constant="200" id="Ezw-If-O9m"/>
+                                    <constraint firstItem="Ikj-ix-Bf4" firstAttribute="top" secondItem="jom-aq-HYe" secondAttribute="top" id="HgG-9K-9Q1"/>
+                                    <constraint firstItem="Ikj-ix-Bf4" firstAttribute="leading" secondItem="jom-aq-HYe" secondAttribute="leading" id="YDt-LI-kbv"/>
+                                    <constraint firstAttribute="height" constant="200" id="ZAE-uV-OSQ"/>
+                                    <constraint firstItem="vDw-g4-cSY" firstAttribute="leading" secondItem="jom-aq-HYe" secondAttribute="leading" id="zyN-a2-Q1h"/>
                                 </constraints>
-                                <state key="normal" title="Login to VK"/>
-                                <connections>
-                                    <action selector="onButtonClickLogin:" destination="A7Z-zu-jVM" eventType="touchUpInside" id="s8r-pl-BKR"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="vDw-g4-cSY" secondAttribute="trailing" constant="20" id="Sor-aL-Lb9"/>
-                            <constraint firstItem="vDw-g4-cSY" firstAttribute="leading" secondItem="JCK-Ct-Ne2" secondAttribute="leading" constant="20" id="WFA-KB-MnK"/>
-                            <constraint firstItem="vDw-g4-cSY" firstAttribute="centerY" secondItem="JCK-Ct-Ne2" secondAttribute="centerY" id="gFG-Hz-MWn"/>
+                            <constraint firstItem="jom-aq-HYe" firstAttribute="centerX" secondItem="JCK-Ct-Ne2" secondAttribute="centerX" id="DLW-rQ-imU"/>
+                            <constraint firstItem="jom-aq-HYe" firstAttribute="centerY" secondItem="JCK-Ct-Ne2" secondAttribute="centerY" id="hx4-Qh-MRx"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -40,7 +60,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQZ-RB-9aE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-187" y="-90"/>
+            <point key="canvasLocation" x="-187.19999999999999" y="-90.854572713643179"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="vk_button" width="135" height="135"/>
+    </resources>
 </document>

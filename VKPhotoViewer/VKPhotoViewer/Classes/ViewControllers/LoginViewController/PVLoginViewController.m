@@ -7,33 +7,33 @@
 //
 
 #import "PVLoginViewController.h"
+#import "UIAlertController+Additions.h"
 #import "PVAlbumsTableViewController.h"
+#import "MBProgressHUD.h"
 
 static NSArray *permissions = nil;
 static NSString *appId = @"5723402";
-
-@interface PVLoginViewController ()
-
-- (UIAlertController*)alertViewControllerWithTitle:(NSString*)title message:(NSString*)message;
-
-@end
 
 @implementation PVLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    permissions = @[VK_PER_FRIENDS, VK_PER_WALL, VK_PER_AUDIO, VK_PER_PHOTOS, VK_PER_NOHTTPS, VK_PER_EMAIL, VK_PER_MESSAGES];
+    permissions = @[VK_PER_PHOTOS];
     [[VKSdk initializeWithAppId:appId] registerDelegate:self];
     [[VKSdk instance] setUiDelegate:self];
     [VKSdk wakeUpSession:permissions completeBlock:^(VKAuthorizationState state, NSError *error) {
         if (state == VKAuthorizationAuthorized) {
             [self.navigationController pushViewController:[PVAlbumsTableViewController newInstance] animated:true];
         } else if (error) {
-            [self presentViewController:[self alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
+            [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
         }
     }];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:true];
+    [self.navigationController setToolbarHidden:true];
 }
 
 //MARK: - IBAction
@@ -48,12 +48,14 @@ static NSString *appId = @"5723402";
     if (result.token) {
         [self.navigationController pushViewController:[PVAlbumsTableViewController newInstance] animated:true];
     } else if (result.error) {
-        [self presentViewController:[self alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
+         [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
+       // [self presentViewController:[self alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
     }
 }
 
 - (void)vkSdkUserAuthorizationFailed {
-    [self presentViewController:[self alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
+     [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
+   // [self presentViewController:[self alertViewControllerWithTitle:@"Error" message:@"Fail to authorize"] animated:true completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -66,17 +68,6 @@ static NSString *appId = @"5723402";
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
     VKCaptchaViewController *vc = [VKCaptchaViewController captchaControllerWithError:captchaError];
     [vc presentIn:self.navigationController.topViewController];
-}
-
-//MARK: - UIAlertViewController
-
-- (UIAlertController*)alertViewControllerWithTitle:(NSString*)title message:(NSString*)message {
-    UIAlertAction *okAlertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        [self.navigationController popViewControllerAnimated:true];
-    }];
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alertVC addAction:okAlertAction];
-    return alertVC;
 }
 
 @end

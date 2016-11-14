@@ -8,9 +8,10 @@
 
 #import "PVPhotosTableViewController.h"
 #import "PVPhotoTableViewCell.h"
+#import "UIAlertController+Additions.h"
 #import "PVPhotoModel.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "MWPhotoBrowser.h"
+#import "MBProgressHUD.h"
 #import "VKsdk.h"
 
 // vk api methods, parameters
@@ -37,18 +38,41 @@ static const CGFloat CELL_HEIGHT = 250;
     UINib *cellNib = [UINib nibWithNibName:identifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:identifier];
     
+    //set refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshUserPhotosData) forControlEvents:UIControlEventValueChanged];
+    
     //get photos data
     [self getUserPhotos];
 }
 
-// MARK: - Get user photos
 - (void)getUserPhotos {
+    //method for getting photos data after loading of controller
+    MBProgressHUD *activityView = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    activityView.mode = MBProgressHUDModeIndeterminate;
     VKRequest *photosRequest = [VKRequest requestWithMethod:getAlbumsMethod parameters:@{VK_API_USER_ID:self.user.id, VK_API_ALBUM_ID: self.albumIdParameter}];
     [photosRequest executeWithResultBlock:^(VKResponse *response) {
         self.photosData = [self parseResponse:response.json];
         [self.tableView reloadData];
+        [activityView hide:YES];
     } errorBlock:^(NSError *error) {
-        NSLog(@"Error");
+        [activityView hide:YES];
+        NSString *errorString = [NSString stringWithFormat:@"%@", error.localizedDescription];
+        [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:errorString] animated:true completion:nil];
+    }];
+}
+
+- (void)refreshUserPhotosData {
+    //additional method to avoid activity view during spinner
+    VKRequest *photosRequest = [VKRequest requestWithMethod:getAlbumsMethod parameters:@{VK_API_USER_ID:self.user.id, VK_API_ALBUM_ID: self.albumIdParameter}];
+    [photosRequest executeWithResultBlock:^(VKResponse *response) {
+        self.photosData = [self parseResponse:response.json];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    } errorBlock:^(NSError *error) {
+        [self.refreshControl endRefreshing];
+        NSString *errorString = [NSString stringWithFormat:@"%@", error.localizedDescription];
+        [self presentViewController:[UIAlertController alertViewControllerWithTitle:@"Error" message:errorString] animated:true completion:nil];
     }];
 }
 
@@ -56,7 +80,6 @@ static const CGFloat CELL_HEIGHT = 250;
     NSMutableArray *array = [NSMutableArray new];
     for (id jsonItem in responseObject[@"items"]) {
         NSError *error = nil;
-        
         PVPhotoModel *photoModel = [MTLJSONAdapter modelOfClass:PVPhotoModel.class fromJSONDictionary:jsonItem error:&error];
         
         if (error) {
@@ -71,7 +94,7 @@ static const CGFloat CELL_HEIGHT = 250;
     
     return array;
 }
-    
+
 
 // MARK: - Table view data source
 
@@ -87,8 +110,7 @@ static const CGFloat CELL_HEIGHT = 250;
     NSString *identifier = NSStringFromClass([PVPhotoTableViewCell class]);
     PVPhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     PVPhotoModel *dataForCell = [self.photosData objectAtIndex:indexPath.row];
-    [cell.photo sd_setImageWithURL:[dataForCell getThumb]];
-    cell.photoTitle.text = [dataForCell getPhotoDescription];
+    [cell updateWithModel:dataForCell];
     return cell;
 }
     
@@ -99,6 +121,8 @@ static const CGFloat CELL_HEIGHT = 250;
     self.photosArray = [@[photo] mutableCopy];
     [self.navigationController pushViewController:photoBrowser animated:true];
 }
+
+
 
 // MARK: - Table view delegate
 

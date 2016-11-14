@@ -19,6 +19,7 @@
                             <outlet property="delegate" destination="zTO-6q-rV9" id="Fdj-lU-yeh"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="0.0" height="480"/>
                 </tableViewController>

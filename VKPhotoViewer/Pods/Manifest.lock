@@ -3,6 +3,7 @@ PODS:
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
   - Mantle/extobjc (2.1.0)
+  - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
   - MWPhotoBrowser (2.1.2):
     - DACircularProgress (~> 2.3)
@@ -15,6 +16,7 @@ PODS:
 
 DEPENDENCIES:
   - Mantle
+  - Masonry (~> 1.0.2)
   - MWPhotoBrowser (~> 2.1.2)
   - SDWebImage (~> 3.8)
   - VK-ios-sdk
@@ -22,11 +24,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   VK-ios-sdk: 296c3be1bb45faf4d9f9a2ca69dcf6ec71d9d4df
 
-PODFILE CHECKSUM: e7ad305e414934a548bf0274da87818d8d0b8c03
+PODFILE CHECKSUM: 155ca114efc62cd4db2ff797c3ca53294f2bdf64
 
 COCOAPODS: 1.1.0.rc.2

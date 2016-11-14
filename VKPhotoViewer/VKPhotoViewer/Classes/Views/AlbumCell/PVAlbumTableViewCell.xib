@@ -8,39 +8,40 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PVAlbumTableViewCell" id="KGk-i7-Jjw" customClass="PVAlbumTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PVAlbumTableViewCell" rowHeight="230" id="KGk-i7-Jjw" userLabel="\" customClass="PVAlbumTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="230"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="99"/>
+                <frame key="frameInset" width="346" height="229"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="13Z-5S-UgT">
-                        <constraints>
-                            <constraint firstAttribute="width" constant="80" id="lPX-Vw-y5E"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.61052028800000002" green="0.61052028800000002" blue="0.61052028800000002" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LmA-av-NiN">
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPh-EV-r0k">
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <size key="shadowOffset" width="1" height="0.0"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="LmA-av-NiN" secondAttribute="trailing" constant="10" id="08d-8T-x2o"/>
-                    <constraint firstAttribute="bottom" secondItem="LmA-av-NiN" secondAttribute="bottom" constant="10" id="GCH-y1-5Ol"/>
-                    <constraint firstItem="13Z-5S-UgT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="VUq-mK-UsL"/>
-                    <constraint firstItem="13Z-5S-UgT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Xap-Sz-mUs"/>
-                    <constraint firstItem="LmA-av-NiN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="dxs-RF-IQu"/>
-                    <constraint firstItem="LmA-av-NiN" firstAttribute="leading" secondItem="13Z-5S-UgT" secondAttribute="trailing" constant="10" id="gnc-Z4-Chc"/>
-                    <constraint firstAttribute="bottom" secondItem="13Z-5S-UgT" secondAttribute="bottom" constant="10" id="pPX-AK-M65"/>
+                    <constraint firstAttribute="bottom" secondItem="13Z-5S-UgT" secondAttribute="bottom" constant="10" id="7bv-CO-HtO"/>
+                    <constraint firstItem="13Z-5S-UgT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="LNG-3H-GCx"/>
+                    <constraint firstItem="uPh-EV-r0k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="RSU-su-9Wf"/>
+                    <constraint firstItem="13Z-5S-UgT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="T38-bu-Rer"/>
+                    <constraint firstAttribute="trailing" secondItem="uPh-EV-r0k" secondAttribute="trailing" constant="10" id="VpY-aP-Nab"/>
+                    <constraint firstAttribute="bottom" secondItem="uPh-EV-r0k" secondAttribute="bottom" constant="10" id="XQT-JJ-3wB"/>
+                    <constraint firstItem="uPh-EV-r0k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dZD-nm-rDv"/>
+                    <constraint firstAttribute="trailing" secondItem="13Z-5S-UgT" secondAttribute="trailing" constant="10" id="vul-L8-7NE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="albumImage" destination="13Z-5S-UgT" id="74F-XL-iyp"/>
-                <outlet property="albumTitle" destination="LmA-av-NiN" id="GTs-Gr-zuI"/>
+                <outlet property="albumTitle" destination="uPh-EV-r0k" id="PSL-la-FMY"/>
             </connections>
-            <point key="canvasLocation" x="15.5" y="94.5"/>
+            <point key="canvasLocation" x="-55" y="140"/>
         </tableViewCell>
     </objects>
 </document>
