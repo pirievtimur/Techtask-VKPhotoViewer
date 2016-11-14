@@ -156,6 +156,7 @@ static const CGFloat CELL_HEIGHT = 150;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PVPhotosTableViewController *photosVC = [PVPhotosTableViewController newInstance];
     PVAlbumModel *dataForCell = [self.albumsData objectAtIndex:indexPath.row];
+    photosVC.title = dataForCell.title;
     photosVC.albumId = dataForCell.albumId;
     photosVC.user = self.currentUser;
     [self.navigationController pushViewController:photosVC animated:true];
